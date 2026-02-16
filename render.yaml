@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: mail_stock
+    runtime: python
+    region: singapore
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: python stockmail_bot.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: TELEGRAM_TOKEN
+        sync: false
+      - key: MONGODB_URI
+        sync: false
