@@ -141,30 +141,17 @@ async def delete_email(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     collection.delete_one({"email": email})
     await update.message.reply_text(f"✅ {email} ডিলিট হয়েছে")
-
 def main():
     """বট চালু করুন"""
     try:
         logger.info("🤖 বট চালু হচ্ছে...")
-        
-        # Application তৈরি
         app = Application.builder().token(TELEGRAM_TOKEN).build()
-        
-        # হ্যান্ডলার যোগ করুন
         app.add_handler(CommandHandler("start", start))
-        app.add_handler(CommandHandler("postmail", postmail))
-        app.add_handler(CommandHandler("view", view))
-        app.add_handler(CommandHandler("list", list_emails))
-        app.add_handler(CommandHandler("update", update_email))
-        app.add_handler(CommandHandler("delete", delete_email))
-        
+        # ... অন্যান্য হ্যান্ডলার ...
         logger.info("✅ বট চালু হয়েছে")
-        
-        # বট চালান
         app.run_polling()
-        
     except Exception as e:
-        logger.error(f"বট চালু ত্রুটি: {e}")
+        logger.error(f"বট চালু ত্রুটি: {e}", exc_info=True)  # <-- exc_info=True যোগ করুন
         sys.exit(1)
 
 if __name__ == "__main__":
